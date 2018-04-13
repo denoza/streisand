@@ -31,6 +31,14 @@ simple_obfs_version: "0.0.5"
 simple_obfs_compilation_directory: "/usr/local/src/shadowsocks-simple-obfs-{{ simple_obfs_version }}"
 simple_obfs_configure_flags: "--disable-documentation"
 
+# Goquiet vars
+goquiet_base_url: "https://github.com/cbeuw/GoQuiet/releases/download/"
+goquiet_version: "v1.1.2/gq-server-linux64-1.1.2"
+goquiet_executable: "gq-server-linux64-1.1.2"
+goquiet_config: "gqserver.json"
+goquiet_webserver: "127.0.0.1:443"
+
+
 # Add -v for verbose mode to help with debugging
 shadowsocks_daemon_args: "-u"
 

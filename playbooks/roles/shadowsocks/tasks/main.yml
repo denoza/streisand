@@ -57,6 +57,24 @@
 # Add simple-obfs task file
 - import_tasks: simple-obfs.yml
 
+# Add Goquiet task file
+- import_tasks: goquiet.yml
+
+- name: Generate Shadowsocks-GQ config file
+  template:
+    src: config_gq.json.j2
+    dest: "{{ shadowsocks_location }}/config_gq.json"
+    # The nobody user in nogroup needs to be able to read the config file
+    group: nogroup
+    mode: 0640
+
+- name: Enable the Shadowsocks-gq service so it starts at boot, and bring it up
+  systemd:
+    name: shadowsocks-libev-gq
+    enabled: yes
+    state: started
+
+# Remaining Tasks
 - name: Generate Shadowsocks config file
   template:
     src: config.json.j2

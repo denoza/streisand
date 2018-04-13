@@ -1,5 +1,4 @@
 ---
-
 # Import the GPG playbook vars
 - include_vars: "../../gpg/vars/main.yml"
 

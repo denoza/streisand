@@ -1,0 +1,9 @@
+---
+- name: Download Goquiet Obfuscation Plugin Binaries
+  get_url:
+    url: "{{ goquiet_base_url }}{{ goquiet_version }}"
+    dest: "{{ shadowsocks_location }}"
+    owner: root
+    group: root
+    mode: 0644
+...
