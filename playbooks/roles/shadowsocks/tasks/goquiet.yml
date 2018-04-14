@@ -5,5 +5,5 @@
     dest: "{{ shadowsocks_location }}"
     owner: root
     group: root
-    mode: 0644
+    mode: u+rwx
 ...

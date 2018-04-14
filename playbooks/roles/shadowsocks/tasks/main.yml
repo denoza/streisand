@@ -37,6 +37,18 @@
     dest: "/etc/default/shadowsocks-libev"
     mode: 0644
 
+- name: Populate the shadowsocks-libev-gq systemd service
+  template:
+    src: shadowsocks-libev-gq.service.j2
+    dest: "/lib/systemd/system/shadowsocks-libev-gq.service"
+    mode: 0644
+
+- name: Populate the shadowsocks-libev-gq systemd defaults
+  template:
+    src: shadowsocks-libev-gq.default.j2
+    dest: "/etc/default/shadowsocks-libev-gq"
+    mode: 0644
+
 - name: Generate a random Shadowsocks password
   shell: openssl rand -base64 48 > {{ shadowsocks_password_file }}
   args:
@@ -73,6 +85,14 @@
     name: shadowsocks-libev-gq
     enabled: yes
     state: started
+
+- name: Generate Goquiet config file
+  template:
+    src: gqserver.json.j2
+    dest: "{{ shadowsocks_location }}/gqserver.json"
+    # The nobody user in nogroup needs to be able to read the config file
+    group: nogroup
+    mode: 0640
 
 # Remaining Tasks
 - name: Generate Shadowsocks config file
