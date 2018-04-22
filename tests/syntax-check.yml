@@ -74,8 +74,8 @@
     - genesis-google
     - genesis-linode
     - genesis-rackspace
+    - i18n-docs
     - ip-forwarding
-    - l2tp-ipsec
     - lets-encrypt
     - monit
     - nginx
