@@ -1,4 +1,6 @@
-![Streisand Logo](https://raw.githubusercontent.com/jlund/streisand/master/logo.jpg "Автоматизируйте эффект Стрейзанд!")
+<p align="center">
+  <img src="https://raw.githubusercontent.com/jlund/streisand/master/logo.jpg" alt="Automate the effect"/> 
+</p>
 
 - - -
 [English](README.md), [Français](README-fr.md), [简体中文](README-chs.md), [Русский](README-ru.md) | [Зеркало](https://gitlab.com/alimakki/streisand)
@@ -41,8 +43,6 @@
 Предоставляемые сервисы
 -----------------
 
-* [Monit](https://mmonit.com/monit/)
-  * Отслеживает здоровье процессов и автоматически перезапускает их , если они падают или зависают.
 * [OpenSSH](https://www.openssh.com/)
   * Создается непривилегированный пользователь и пара ключей для [sshuttle](https://github.com/sshuttle/sshuttle) и SOCKS.
   * Поддерживаются также SSH-туннели Windows и Android, создается копия пары ключей в .ppk формате для PuTTY

@@ -48,10 +48,16 @@ function check_python() {
 # service vars (e.g. that at least one service is enabled after customization of
 # $SITE_VARS).
 function validate() {
+  local NEW_SERVER_PROVISIONING=$1
+  if [ -z "${NEW_SERVER_PROVISIONING}" ]; then
+    NEW_SERVER_PROVISIONING=true
+  fi
+  
   echo; echo; ansible-playbook \
     --extra-vars="@$GLOBAL_VARS" \
     --extra-vars="@$DEFAULT_SITE_VARS" \
     --extra-vars="@$SITE_VARS" \
+    --extra-vars="streisand_new_server_provisioning=$NEW_SERVER_PROVISIONING" \
     playbooks/validate.yml
 }
 
@@ -82,6 +88,7 @@ Press enter to customize your installation: " confirm
 # is provided.
 function run_genesis() {
   local GENESIS_PLAYBOOK=$1
+  local ASK_BECOME=""
   if [ -z "${GENESIS_PLAYBOOK}" ]; then
     GENESIS_PLAYBOOK=streisand.yml
   fi
@@ -92,13 +99,25 @@ function run_genesis() {
   # Customize the Streisand services that will be installed
   customize
   # Ensure that the customization hasn't resulted in something inconsistent
-  validate
+  # NEW_SERVER_PROVISIONING can be False or True (0 or 1), tests if we need 
+  # to check existence of SSH public key
+  if [ "$GENESIS_PLAYBOOK" != "existing-server.yml" ] && [ "$GENESIS_PLAYBOOK" != "localhost.yml" ]; then
+    validate true
+  else
+    validate false
+  fi
+  
+  if [ -n "${SSH_USER}" ] && [ "$SSH_USER" != "root" ]; then
+    ASK_BECOME="--ask-become-pass"
+  fi
+  
   # Run the specified genesis playbook with the specified Ansible inventory
   echo; echo; ansible-playbook \
     -i $GENESIS_INVENTORY \
     --extra-vars="@$GLOBAL_VARS" \
     --extra-vars="@$DEFAULT_SITE_VARS" \
     --extra-vars="@$SITE_VARS" \
+    $ASK_BECOME \
     "playbooks/$GENESIS_PLAYBOOK"
 }
 
@@ -174,7 +193,7 @@ read -r -p "Which provider are you using?
   4. Google
   5. Linode
   6. Rackspace
-  7. Localhost (Advanced)
+  7. localhost (Advanced)
   8. Existing Server (Advanced)
 : " reply
 
