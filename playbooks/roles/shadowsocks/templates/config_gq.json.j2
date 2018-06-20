@@ -6,6 +6,6 @@
     "timeout":{{ shadowsocks_timeout }},
     "method":"{{ shadowsocks_encryption_method }}",
     "fast_open":{{ shadowsocks_tcp_fast_open }},
-    "plugin":"{{ shadowsocks_goquiet_plugin }}",
-    "plugin_opts":"{{ shadowsocks_goquiet_plugin_opts }}"
+    "plugin":"{{ shadowsocks_location }}/{{ shadowsocks_goquiet_plugin }}",
+    "plugin_opts":"{{ shadowsocks_location }}/{{ shadowsocks_goquiet_plugin_opts }}"
 }
