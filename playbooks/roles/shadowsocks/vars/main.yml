@@ -38,6 +38,11 @@ goquiet_executable: "gq-server-linux-amd64-1.2.2"
 goquiet_config: "gqserver.json"
 goquiet_webserver: "127.0.0.1:443"
 
+# V2ray-plugin
+go_path: "GOPATH=$HOME/go"
+v2ray_github: "github.com/shadowsocks/v2ray-plugin"
+v2ray_location: "/root/go/bin"
+v2ray_options: "fast-open;{{ le_certificate }};{{ le_private_key }};server;tls"
 
 # Add -v for verbose mode to help with debugging
 shadowsocks_daemon_args: "-u"

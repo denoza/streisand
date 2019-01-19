@@ -3,3 +3,8 @@
   systemd:
     name: shadowsocks-libev.service
     state: restarted
+
+- name: Restart shadowsocks-libev-gq
+  systemd:
+    name: shadowsocks-libev-gq.service
+    state: restarted
